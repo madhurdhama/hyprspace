@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e 
+
+# Install required packages
+sudo pacman -S --noconfirm --needed tmux skim
+
+# Clone config repo and copy files
+TMPDIR=$(mktemp -d)
+git clone https://github.com/madhur-dhama/hyprspace "$TMPDIR"
+cp -a "$TMPDIR/config/." ~/.config/
+rm -rf "$TMPDIR"
+
+# Add tmux keybind if missing
+BIND_LINE='bind -x '"'"'"\C-f":"$HOME/.config/scripts/tmux-sessionizer"'"'"
+grep -Fxq "$BIND_LINE" ~/.bashrc || echo "$BIND_LINE" >> ~/.bashrc
+
+# Update Alacritty font size and monitor scale
+sed -i 's/^\(size = \).*/\1 11/' "$HOME/.config/alacritty/alacritty.toml"
+sed -i 's/^\(monitor=,preferred,auto,\).*/\1 1.25/' "$HOME/.config/hypr/monitors.conf"
+
+# Ensure lock-screen autostart in Hyprland config
+LOCK_CMD='exec-once = ~/.local/share/omarchy/bin/omarchy-lock-screen'
+HYPRCONF="$HOME/.config/hypr/autostart.conf"
+grep -Fxq "$LOCK_CMD" "$HYPRCONF" || echo "$LOCK_CMD" >> "$HYPRCONF"
+
+echo "✅ Setup complete."
