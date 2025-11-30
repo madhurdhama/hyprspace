@@ -35,7 +35,7 @@ if [[ $OMARCHY_REF != "master" ]]; then
   cd -
 fi
 
-export OMARCHY_USER_NAME="madhur-dhama"
+export OMARCHY_USER_NAME="madhurdhama"
 export OMARCHY_USER_EMAIL="madhurdhama@gmail.com"
 
 echo -e "\nInstallation starting..."
