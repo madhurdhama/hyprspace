@@ -1,10 +1,8 @@
 #!/bin/bash
 
 DIRS=(
-  "$HOME/Documents"
   "$HOME"
-  "$HOME/Documents/webdev/"
-  "$HOME/personal/"
+  "$HOME/project/"
 )
 
 if [[ $# -eq 1 ]]; then
