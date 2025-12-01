@@ -2,7 +2,7 @@
 
 DIRS=(
   "$HOME"
-  "$HOME/project/"
+  "$HOME/projects/"
 )
 
 if [[ $# -eq 1 ]]; then
